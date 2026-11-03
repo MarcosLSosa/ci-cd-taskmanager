@@ -1,0 +1,7 @@
+services:
+  taskmanager:
+    build: .
+    container_name: taskmanager
+    ports:
+      - "8080:5000"
+    restart: unless-stopped

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>TaskManager</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px #0002;
+        }
+
+        h1 { color: #2563eb; }
+
+        input {
+            padding: 12px;
+            width: 70%;
+        }
+
+        button {
+            padding: 12px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        li {
+            padding: 12px;
+            margin: 10px 0;
+            background: #f1f5f9;
+            list-style: none;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>TaskManager</h1>
+    <p>Administración de tareas - Demo CI/CD</p>
+
+    <form action="/add" method="POST">
+        <input type="text" name="title" placeholder="Nueva tarea..." required>
+        <button type="submit">Agregar</button>
+    </form>
+
+    <h2>Mis tareas</h2>
+
+    <ul>
+        {% for task in tasks %}
+        <li>
+            <span class="{{ 'completed' if task.completed else '' }}">
+                {{ task.title }}
+            </span>
+
+            <a href="/complete/{{ task.id }}">
+                {% if task.completed %}
+                    Desmarcar
+                {% else %}
+                    Completar
+                {% endif %}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <hr>
+
+    <p><strong>Versión:</strong> 1.0</p>
+    <p>Aplicación desplegada mediante Docker.</p>
+
+</div>
+
+</body>
+</html>
