@@ -1,0 +1,31 @@
+name: CI-CD TaskManager
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-test-deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Descargar codigo
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Ejecutar tests
+        run: pytest -v
+
+      - name: Desplegar aplicacion
+        run: docker-compose up -d --build
+
+      - name: Verificar aplicacion
+        run: curl --fail http://localhost:8080/health
