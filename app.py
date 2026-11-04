@@ -1,3 +1,4 @@
+
 from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
@@ -38,7 +39,7 @@ def complete_task(task_id):
 
 @app.route("/health")
 def health():
-    return {"status": "healthy"}, 200
+    return {"status": "healthy"}, 201
 
 
 if __name__ == "__main__":
