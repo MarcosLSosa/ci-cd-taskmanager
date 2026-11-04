@@ -22,7 +22,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Ejecutar tests
-        run: pytest -v
+        run: python -m pytest -v
 
       - name: Desplegar aplicacion
         run: docker-compose up -d --build
