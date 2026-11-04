@@ -39,7 +39,7 @@ def complete_task(task_id):
 
 @app.route("/health")
 def health():
-    return {"status": "healthy"}, 201
+    return {"status": "healthy"}, 200
 
 
 if __name__ == "__main__":
