@@ -27,5 +27,19 @@ jobs:
       - name: Desplegar aplicacion
         run: docker compose up -d --build
 
-      - name: Verificar aplicacion
-        run: curl --fail http://localhost:8080/health
+            - name: Verificar aplicacion
+        run: |
+          for i in {1..15}; do
+            if curl --fail --silent http://localhost:8080/health; then
+              echo ""
+              echo "Aplicacion funcionando correctamente."
+              exit 0
+            fi
+
+            echo "Esperando que la aplicacion este lista... intento $i/15"
+            sleep 2
+          done
+
+          echo "ERROR: La aplicacion no respondio."
+          docker compose logs --tail=80 taskmanager
+          exit 1
