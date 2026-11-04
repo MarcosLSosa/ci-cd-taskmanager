@@ -25,7 +25,7 @@ jobs:
         run: python -m pytest -v
 
       - name: Desplegar aplicacion
-        run: docker-compose up -d --build
+        run: docker compose up -d --build
 
       - name: Verificar aplicacion
         run: curl --fail http://localhost:8080/health
